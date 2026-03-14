@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { Post } from "@/types";
-import { usePostsStore } from "@/store/postsStore";
+import { usePostsStore } from "@/store/postStore";
 import PostCard from "./PostCard";
 import Pagination from "./Pagination";
 

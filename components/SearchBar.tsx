@@ -1,6 +1,6 @@
 "use client";
 
-import { useUsersStore } from "@/store/usersStore";
+import { useUsersStore } from "@/store/userStore";
 
 export default function SearchBar() {
   const { searchQuery, setSearchQuery } = useUsersStore();

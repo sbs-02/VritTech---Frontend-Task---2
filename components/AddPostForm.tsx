@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { usePostsStore } from "@/store/postsStore";
+import { usePostsStore } from "@/store/postStore";
 import { postSchema, PostFormData } from "@/lib/validators";
 import { createPost } from "@/lib/api";
 

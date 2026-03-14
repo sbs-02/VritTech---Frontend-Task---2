@@ -1,6 +1,6 @@
 "use client";
 
-import { usePostsStore } from "@/store/postsStore";
+import { usePostsStore } from "@/store/postStore";
 
 export default function Pagination() {
   const { currentPage, setCurrentPage, getTotalPages } = usePostsStore();
