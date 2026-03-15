@@ -6,19 +6,21 @@ export default function SearchBar() {
   const { searchQuery, setSearchQuery } = useUsersStore();
 
   return (
-    <div className="relative w-full max-w-[480px]">
+    <div className="relative group">
       <input
         type="text"
-        placeholder="Search by name or email..."
+        placeholder="Search users by name..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="w-full pl-4 pr-10 py-2.5 border border-gray-300 rounded-lg text-[0.95rem] outline-none bg-white text-gray-900 transition-colors shadow-sm focus:border-indigo-500 focus:ring-3 focus:ring-indigo-500/15"
-        aria-label="Search users"
+        className="w-full px-12 py-4 bg-white border border-gray-100 rounded-2xl text-gray-900 text-base font-medium placeholder-gray-400 outline-none transition-all shadow-sm focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
       />
+      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-gray-400 group-focus-within:text-blue-600 transition-colors">
+        🔍
+      </span>
       {searchQuery && (
         <button
-          className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-gray-400 text-[0.85rem] p-1 leading-none hover:text-gray-600"
           onClick={() => setSearchQuery("")}
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs hover:bg-gray-200 transition-colors"
           aria-label="Clear search"
         >
           ✕

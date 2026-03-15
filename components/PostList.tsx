@@ -21,23 +21,22 @@ export default function PostList({ initialPosts, userId }: Props) {
   const currentPosts = getCurrentPagePosts();
 
   return (
-    <div className="">
-      <div className="flex items-baseline gap-3 mb-4">
-        <h2 className="m-0 text-xl font-bold text-gray-900">Posts</h2>
-        <span className="text-sm text-gray-400">{posts.length} total</span>
-      </div>
-
+    <div className="space-y-8">
       {currentPosts.length === 0 ? (
-        <p className="text-center text-gray-400 p-8">No posts found.</p>
+        <div className="text-center py-20 bg-white border border-dashed border-gray-200 rounded-3xl text-gray-400 font-bold">
+          No posts in the feed yet.
+        </div>
       ) : (
-        <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-1 gap-6">
           {currentPosts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
         </div>
       )}
 
-      <Pagination />
+      <div className="pt-4 border-t border-gray-100">
+        <Pagination />
+      </div>
     </div>
   );
 }

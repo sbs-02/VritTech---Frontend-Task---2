@@ -11,10 +11,12 @@ interface Props {
 
 export default function AddPostForm({ userId }: Props) {
   const { addPost } = usePostsStore();
+
   const [formData, setFormData] = useState<PostFormData>({
     title: "",
     body: "",
   });
+
   const [errors, setErrors] = useState<Partial<PostFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
@@ -66,61 +68,71 @@ export default function AddPostForm({ userId }: Props) {
   };
 
   const inputBaseClasses =
-    "px-3.5 py-2.5 border-[1.5px] rounded-lg text-[0.9rem] font-inherit text-gray-900 bg-white outline-none transition-colors resize-y";
-  const inputNormalClasses =
-    "border-gray-300 focus:border-indigo-500 focus:ring-3 focus:ring-indigo-500/15 shadow-sm";
+    "px-4 py-3 border border-gray-200 rounded-xl text-sm font-medium text-gray-900 bg-gray-50/50 outline-none transition-all focus:bg-white focus:ring-4 focus:ring-blue-100";
+  const inputNormalClasses = "border-gray-200 focus:border-blue-600";
   const inputErrorClasses =
-    "border-red-500 focus:border-red-500 focus:ring-3 focus:ring-red-500/15";
+    "border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-100";
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-6">
-      <h2 className="m-0 mb-5 text-[1.1rem] font-bold text-gray-900">
-        Add New Post
-      </h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-        <div className="flex flex-col gap-1.5">
+    <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white text-lg">
+          ✍️
+        </div>
+        <div>
+          <h2 className="m-0 text-xl font-bold text-gray-900 leading-none">
+            Share Something
+          </h2>
+          <p className="text-sm text-gray-500 mt-1">
+            Create a new post for your feed
+          </p>
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
+        <div className="space-y-2">
           <label
             htmlFor="post-title"
-            className="text-sm font-semibold text-gray-700"
+            className="text-sm font-bold text-gray-700 ml-1"
           >
-            Title
+            Catchy Title
           </label>
           <input
             id="post-title"
             name="title"
             type="text"
-            placeholder="Enter post title..."
+            placeholder="What's on your mind?"
             value={formData.title}
             onChange={handleChange}
-            className={`${inputBaseClasses} ${errors.title ? inputErrorClasses : inputNormalClasses}`}
+            className={`${inputBaseClasses} ${errors.title ? inputErrorClasses : inputNormalClasses} w-full`}
             disabled={isSubmitting}
           />
           {errors.title && (
-            <span className="text-xs text-red-500 font-medium" role="alert">
+            <span className="text-xs text-red-500 font-bold ml-1" role="alert">
               {errors.title}
             </span>
           )}
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="space-y-2">
           <label
             htmlFor="post-body"
-            className="text-sm font-semibold text-gray-700"
+            className="text-sm font-bold text-gray-700 ml-1"
           >
-            Body
+            Post Content
           </label>
           <textarea
             id="post-body"
             name="body"
-            placeholder="Write your post content..."
+            placeholder="Tell us more about it..."
             value={formData.body}
             onChange={handleChange}
             rows={4}
-            className={`${inputBaseClasses} ${errors.body ? inputErrorClasses : inputNormalClasses}`}
+            className={`${inputBaseClasses} ${errors.body ? inputErrorClasses : inputNormalClasses} w-full`}
             disabled={isSubmitting}
           />
           {errors.body && (
-            <span className="text-xs text-red-500 font-medium" role="alert">
+            <span className="text-xs text-red-500 font-bold ml-1" role="alert">
               {errors.body}
             </span>
           )}
@@ -128,19 +140,19 @@ export default function AddPostForm({ userId }: Props) {
 
         {successMsg && (
           <div
-            className="text-sm text-emerald-600 bg-emerald-50 border border-emerald-200 rounded-md py-2.5 px-3.5 font-medium"
+            className="text-sm text-blue-700 bg-blue-50 border border-blue-100 rounded-xl py-4 px-4 font-bold animate-in fade-in slide-in-from-top-2"
             role="status"
           >
-            ✓ {successMsg}
+            ✨ {successMsg}
           </div>
         )}
 
         <button
           type="submit"
-          className="py-2.5 px-6 bg-indigo-500 text-white rounded-lg text-[0.9rem] font-semibold self-start transition-all hover:enabled:bg-indigo-600 active:enabled:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full py-3.5 px-6 bg-blue-600 text-white rounded-xl text-base font-bold transition-all hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-100 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Adding..." : "Add Post"}
+          {isSubmitting ? "Posting..." : "Post to Feed"}
         </button>
       </form>
     </div>

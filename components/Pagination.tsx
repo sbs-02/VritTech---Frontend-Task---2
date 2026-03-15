@@ -16,24 +16,24 @@ export default function Pagination() {
       aria-label="Post pagination"
     >
       <button
-        className="py-1.5 px-3.5 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-medium transition-colors hover:enabled:bg-gray-100 hover:enabled:border-gray-400 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
         onClick={() => setCurrentPage(currentPage - 1)}
         disabled={currentPage === 1}
+        className="flex items-center gap-1.5 px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-bold text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50 transition-all active:scale-95"
         aria-label="Previous page"
       >
-        ← Prev
+        <span>←</span> Prev
       </button>
 
-      <div className="flex gap-1">
+      <div className="flex items-center gap-2">
         {pages.map((page) => (
           <button
             key={page}
-            className={`w-9 h-9 border rounded-lg text-sm font-medium transition-colors shadow-sm ${
-              page === currentPage
-                ? "bg-indigo-500 border-indigo-500 text-white"
-                : "bg-white border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400"
-            }`}
             onClick={() => setCurrentPage(page)}
+            className={`w-10 h-10 rounded-xl text-sm font-bold transition-all active:scale-90 ${
+              currentPage === page
+                ? "bg-blue-600 text-white shadow-lg shadow-blue-100"
+                : "bg-white text-gray-600 border border-gray-100 hover:bg-gray-50"
+            }`}
             aria-current={page === currentPage ? "page" : undefined}
           >
             {page}
@@ -42,12 +42,12 @@ export default function Pagination() {
       </div>
 
       <button
-        className="py-1.5 px-3.5 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-medium transition-colors hover:enabled:bg-gray-100 hover:enabled:border-gray-400 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm"
         onClick={() => setCurrentPage(currentPage + 1)}
         disabled={currentPage === totalPages}
+        className="flex items-center gap-1.5 px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-bold text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50 transition-all active:scale-95"
         aria-label="Next page"
       >
-        Next →
+        Next <span>→</span>
       </button>
     </nav>
   );

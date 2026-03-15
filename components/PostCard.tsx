@@ -7,17 +7,19 @@ interface Props {
 export default function PostCard({ post }: Props) {
   return (
     <div
-      className={`bg-white border border-gray-200 rounded-xl px-6 py-5 relative transition-shadow hover:shadow-[0_2px_12px_rgba(0,0,0,0.07)] ${post.isLocal ? "border-l-4 border-l-indigo-500 bg-gray-50" : ""}`}
+      className={`bg-white border border-gray-100 rounded-2xl p-6 relative transition-all hover:shadow-lg group ${post.isLocal ? "border-l-4 border-l-blue-600 bg-blue-50/30" : ""}`}
     >
       {post.isLocal && (
-        <span className="inline-block text-[0.7rem] font-semibold bg-violet-100 text-violet-700 rounded-full px-2.5 py-0.5 mb-2 uppercase tracking-tight">
-          New (Local)
+        <span className="absolute top-4 right-4 text-[10px] font-bold bg-blue-600 text-white rounded-full px-2 py-0.5 uppercase tracking-wider">
+          Recent Post
         </span>
       )}
-      <h3 className="m-0 mb-2 text-[0.975rem] font-semibold text-gray-800 capitalize">
+      <h3 className="m-0 mb-3 text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors capitalize leading-snug">
         {post.title}
       </h3>
-      <p className="m-0 text-sm text-gray-500 leading-relaxed">{post.body}</p>
+      <p className="m-0 text-[0.925rem] text-gray-600 leading-relaxed font-medium capitalize">
+        {post.body}
+      </p>
     </div>
   );
 }

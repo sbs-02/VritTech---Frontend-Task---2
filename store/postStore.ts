@@ -39,52 +39,44 @@ interface PostsState {
   getCurrentPagePosts: () => Post[];
 }
 
-export const usePostsStore = create<PostsState>(
-  (
-    set: (arg0: { posts?: any[]; currentPage: number }) => void,
-    get: () => { posts: any; postsPerPage?: any; currentPage?: any },
-  ) => ({
-    posts: [],
-    currentPage: 1,
-    postsPerPage: POSTS_PER_PAGE,
+export const usePostsStore = create<PostsState>((set, get) => ({
+  posts: [],
+  currentPage: 1,
+  postsPerPage: POSTS_PER_PAGE,
 
-    setPosts: (posts: Post[], userId?: number) => {
-      const localPosts = userId ? getLocalPosts(userId) : [];
-      // Merge local posts on top, avoid duplicates by id
-      const localIds = new Set(localPosts.map((p) => p.id));
-      const merged = [
-        ...localPosts,
-        ...posts.filter((p) => !localIds.has(p.id)),
-      ];
-      set({ posts: merged, currentPage: 1 });
-    },
+  setPosts: (posts: Post[], userId?: number) => {
+    const localPosts = userId ? getLocalPosts(userId) : [];
+    // Merge local posts on top, avoid duplicates by id
+    const localIds = new Set(localPosts.map((p) => p.id));
+    const merged = [...localPosts, ...posts.filter((p) => !localIds.has(p.id))];
+    set({ posts: merged, currentPage: 1 });
+  },
 
-    addPost: (postData: Omit<Post, "id">, userId: number) => {
-      const { posts } = get();
-      const newPost: Post = {
-        ...postData,
-        id: Date.now(), // unique local id
-        isLocal: true,
-      };
-      const updatedPosts = [newPost, ...posts];
-      set({ posts: updatedPosts, currentPage: 1 });
+  addPost: (postData: Omit<Post, "id">, userId: number) => {
+    const { posts } = get();
+    const newPost: Post = {
+      ...postData,
+      id: Date.now(), // unique local id
+      isLocal: true,
+    };
+    const updatedPosts = [newPost, ...posts];
+    set({ posts: updatedPosts, currentPage: 1 });
 
-      // Persist only local posts to localStorage
-      const localPosts = updatedPosts.filter((p) => p.isLocal);
-      saveLocalPosts(userId, localPosts);
-    },
+    // Persist only local posts to localStorage
+    const localPosts = updatedPosts.filter((p) => p.isLocal);
+    saveLocalPosts(userId, localPosts);
+  },
 
-    setCurrentPage: (page: number) => set({ currentPage: page }),
+  setCurrentPage: (page: number) => set({ currentPage: page }),
 
-    getTotalPages: () => {
-      const { posts, postsPerPage } = get();
-      return Math.ceil(posts.length / postsPerPage);
-    },
+  getTotalPages: () => {
+    const { posts, postsPerPage } = get();
+    return Math.ceil(posts.length / postsPerPage);
+  },
 
-    getCurrentPagePosts: () => {
-      const { posts, currentPage, postsPerPage } = get();
-      const start = (currentPage - 1) * postsPerPage;
-      return posts.slice(start, start + postsPerPage);
-    },
-  }),
-);
+  getCurrentPagePosts: () => {
+    const { posts, currentPage, postsPerPage } = get();
+    const start = (currentPage - 1) * postsPerPage;
+    return posts.slice(start, start + postsPerPage);
+  },
+}));

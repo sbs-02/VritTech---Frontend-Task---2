@@ -6,8 +6,6 @@ export default async function HomePage() {
   let users: User[] = [];
   let errorMsg = "";
 
-  // apiIsLoading variable would be used in a client component pattern;
-  // here SSR fetches data before render — loading is implicit via Suspense boundaries.
   try {
     users = await fetchUsers();
   } catch {
@@ -25,5 +23,17 @@ export default async function HomePage() {
     );
   }
 
-  return <UserList initialUsers={users} />;
+  return (
+    <div className="space-y-10">
+      <div className="space-y-2">
+        <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
+          Community Directory
+        </h1>
+        <p className="text-lg text-gray-500 font-medium">
+          Discover and connect with users in the network
+        </p>
+      </div>
+      <UserList initialUsers={users} />
+    </div>
+  );
 }

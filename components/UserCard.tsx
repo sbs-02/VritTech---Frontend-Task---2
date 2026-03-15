@@ -9,27 +9,30 @@ interface Props {
 
 export default function UserCard({ user }: Props) {
   return (
-    <div className="flex items-center gap-4 bg-white border border-gray-200 rounded-xl px-6 py-5 transition-all hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 max-sm:flex-wrap">
-      <div className="shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-white flex items-center justify-center text-[1.2rem] font-bold">
+    <div className="flex items-center gap-5 bg-white border border-gray-100 rounded-2xl p-6 transition-all hover:shadow-xl hover:border-blue-100 group">
+      <div className="shrink-0 w-14 h-14 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold border-2 border-white shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
         {user.name.charAt(0).toUpperCase()}
       </div>
       <div className="flex-1 min-w-0">
-        <h2 className="m-0 mb-1 text-base font-semibold text-gray-900">
+        <h2 className="m-0 mb-1 text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
           {user.name}
         </h2>
-        <p className="m-0 text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">
-          <span className="font-medium text-gray-700">Email:</span> {user.email}
-        </p>
-        <p className="m-0 text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">
-          <span className="font-medium text-gray-700">Company:</span>{" "}
-          {user.company.name}
-        </p>
+        <div className="flex flex-col gap-0.5">
+          <p className="m-0 text-sm text-gray-500 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+            {user.email}
+          </p>
+          <p className="m-0 text-sm text-gray-500 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+            {user.company.name}
+          </p>
+        </div>
       </div>
       <Link
         href={`/users/${user.id}`}
-        className="shrink-0 inline-block py-2 px-4 bg-indigo-500 text-white rounded-lg no-underline text-sm font-medium transition-all hover:bg-indigo-600 hover:scale-[1.03] whitespace-nowrap max-sm:w-full max-sm:text-center"
+        className="shrink-0 inline-flex items-center px-5 py-2.5 bg-blue-600 text-white rounded-xl text-sm font-bold transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 active:scale-95 whitespace-nowrap"
       >
-        View Posts →
+        Explore Posts
       </Link>
     </div>
   );
